@@ -1,9 +1,9 @@
 const knex = require('../config/database')
 
-const get = async () => {
+const get = async (table) => {
   return new Promise((resolve, reject) => {
     knex
-      .from('sekolah')
+      .from(table)
       .then((data) => {
         resolve(data)
       })
@@ -12,11 +12,11 @@ const get = async () => {
       })
   })
 }
-const getById = async (params) => {
+const getBy = async (table,primary,params) => {
   return new Promise((resolve, reject) => {
     knex
-      .from('sekolah')
-      .where("sekolahID",params.id)
+      .from(table)
+      .where(primary,params)
       .then((data) => {
         resolve(data)
       })
@@ -25,17 +25,11 @@ const getById = async (params) => {
       })
   })
 }
-const addSekolah = async body =>{
+const addData = async (table,primary,body) =>{
      return new Promise((resolve, reject) => {
-         knex('sekolah')
-         .insert({
-             sekolahname:body.sekolahName,
-             alamatsekolah:body.alamatSekolah,
-             notlp:body.noTlp,
-             email:body.email,
-             typesekolah:body.typeSekolah
-         })
-         .returning('sekolahID')
+         knex(table)
+         .insert(body)
+         .returning("siswa_nis")
          .then(response => {
         resolve(response);
       })
@@ -103,5 +97,5 @@ const getType = async () => {
 }
 
 module.exports = {
-    get,getById,addSekolah,getType,Update,Delete
+    get,getBy,addData,getType,Update,Delete
 }

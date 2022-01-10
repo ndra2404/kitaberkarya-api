@@ -1,11 +1,14 @@
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require('body-parser');
+const swaggerUi = require('swagger-ui-express');
+const swaggerJSDoc = require('swagger-jsdoc');
+
 var path = require('path');
 
 require("dotenv").config();
 
-const atuhRouter = require("./routers");
+const {sekolahRouter,siswaRouter} = require("./routes");
 
 const router = express.Router();
 var app = express();
@@ -31,7 +34,32 @@ app.use(bodyParser.json({
 router.use(function (req, res, next) {
   next();
 });
-router.use('/sekolah', atuhRouter);
+
+const options = {
+  definition: {
+    openapi: '3.0.0',
+    info: {
+      title: 'Api kita berkarya',
+      version: '1.0.0',
+      desctiption:'yuk bisa yuk'
+    },
+    servers: [
+      {
+        url: `http://localhost:${process.env.PORT}`,
+      }
+    ],
+  },
+  apis: ['./routes/*'], // files containing annotations as above
+};
+
+const swaggerSpec = swaggerJSDoc(options);
+
+router.use('/', sekolahRouter);
+router.use('/', siswaRouter);
+
+
+router.use('/api-docs', swaggerUi.serve);
+router.get('/api-docs', swaggerUi.setup(swaggerSpec));
 app.use(process.env.PREFIX, router);
 
 // catch 404 and forward to error handler
