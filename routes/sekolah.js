@@ -25,6 +25,8 @@ router.get('/sekolah/',sekolahController.get);
  * @swagger
  * /sekolah/detail/{id}:
  *   get:
+ *     security:
+ *       - Bearer: [abc]
  *     summary: Returns the list of all the sekolahDetail
  *     tags: [sekolah]
  *     parameters:
@@ -51,29 +53,22 @@ router.get('/sekolah/detail/:id',sekolahController.getById);
  *       - Bearer: [abc]
  *     summary: sekolahtambah
  *     tags: [sekolah]
- *     parameters:
- *       - in: path
- *         name: add
- *         schema:
- *           type: string
- *         required: true
- *         description: Action Untuk Melakukan Proses API
- *       - in: body
- *         name : user
- *         description: The user to create.
- *         schema :  
- *            type: object
- *            properties:
- *              sekolahName:
- *                type: string
- *              alamatSekolah:
- *                type: string
- *              noTlp:
- *                type: string
- *              typeSekolah:
- *                type: string
- *              email:
- *                type: string
+ *     requestBody:
+ *         content:
+ *           application/json:
+ *              schema:      # Request body contents
+ *                  type: object
+ *                  properties:
+ *                    sekolahName:
+ *                      type: string
+ *                    alamatSekolah:
+ *                      type: string
+ *                    noTlp:
+ *                      type: string
+ *                    typeSekolah:
+ *                      type: integer
+ *                    email:
+ *                      type: string
  *     responses:
  *       200:
  *         description: Action Yg Akan di Pakai
@@ -89,6 +84,8 @@ router.post('/sekolah/',sekolahController.addSekolah);
  * @swagger
  * /sekolah/sekolahtype:
  *   get:
+ *     security:
+ *       - Bearer: [abc]
  *     summary: Returns the list of all the sekolah type
  *     tags: [sekolah]
  *     responses:
@@ -100,6 +97,38 @@ router.post('/sekolah/',sekolahController.addSekolah);
  *               type: array
  */
 router.get('/sekolah/sekolahtype',sekolahController.getType);
+/**
+ * @swagger
+ * /sekolah/detail/{id}:
+ *   post:
+ *     summary: sekolah Update
+ *     tags: [sekolah]
+ *     requestBody:
+ *         content:
+ *           application/json:
+ *              schema:      # Request body contents
+ *                  type: object
+ *                  properties:
+ *                    sekolahName:
+ *                      type: string
+ *                    alamatSekolah:
+ *                      type: string
+ *                    noTlp:
+ *                      type: string
+ *                    typeSekolah:
+ *                      type: integer
+ *                    email:
+ *                      type: string
+ *     responses:
+ *       200:
+ *         description: Action Yg Akan di Pakai
+ *         contens:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *       404:
+ *         description: Data Tidak Di Temukan
+ */
 router.post('/sekolah/detail/:id',sekolahController.UpdateSekolah);
 
 module.exports = router;
