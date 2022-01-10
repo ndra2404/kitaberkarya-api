@@ -1,8 +1,7 @@
-const sekolahModel = require('./sekolah.model');
-const generalModel = require('./general.model');
+const sekolahModel = require("./sekolah.model");
+const generalModel = require("./general.model");
 
-
-module.exports={
-    sekolahModel,
-    generalModel
+module.exports = {
+  sekolahModel,
+  generalModel,
 };

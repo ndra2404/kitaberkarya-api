@@ -1,0 +1,11 @@
+# DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION BEGIN
+PassengerAppRoot "/home/kitaberk/api.kitaberkarya.com"
+PassengerBaseURI "/"
+PassengerNodejs "/home/kitaberk/nodevenv/api.kitaberkarya.com/10/bin/node"
+PassengerAppType node
+PassengerStartupFile apps.js
+# DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION END
+# DO NOT REMOVE OR MODIFY. CLOUDLINUX ENV VARS CONFIGURATION BEGIN
+<IfModule Litespeed>
+</IfModule>
+# DO NOT REMOVE OR MODIFY. CLOUDLINUX ENV VARS CONFIGURATION END
