@@ -79,5 +79,4 @@ app.use((err, req, res, next) => {
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Listening: http://localhost:${port}`);
-  console.log("Up and running books service");
 });
