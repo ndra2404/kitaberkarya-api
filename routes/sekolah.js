@@ -103,6 +103,13 @@ router.get('/sekolah/sekolahtype',sekolahController.getType);
  *   post:
  *     summary: sekolah Update
  *     tags: [sekolah]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: id sekolah
  *     requestBody:
  *         content:
  *           application/json:
