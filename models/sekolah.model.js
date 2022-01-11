@@ -4,6 +4,8 @@ const get = async () => {
   return new Promise((resolve, reject) => {
     knex
       .from("sekolah")
+      .leftJoin('sekolah_type', 'sekolah.typesekolah', 'sekolah_type.sty_typeID')
+      .select("sekolahID","sekolahname","alamatsekolah","logosekolah","notlp","email","sty_type as typesekolah")
       .then((data) => {
         resolve(data);
       })
@@ -73,13 +75,7 @@ const Update = (idSekolah, body) => {
 const Delete = (idSekolah) => {
   return new Promise((resolve, reject) => {
     knex("sekolah")
-      .update({
-        sekolahname: body.sekolahName,
-        alamatsekolah: body.alamatSekolah,
-        notlp: body.noTlp,
-        email: body.email,
-        typesekolah: body.typeSekolah,
-      })
+      .del()
       .where("sekolahID", idSekolah)
       .returning("sekolahID")
       .then((idSekolah) => {
@@ -94,7 +90,7 @@ const Delete = (idSekolah) => {
 const getType = async () => {
   return new Promise((resolve, reject) => {
     knex
-      .from("sekolahType")
+      .from("sekolah_type")
       .then((data) => {
         resolve(data);
       })

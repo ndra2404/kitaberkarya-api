@@ -137,5 +137,30 @@ router.get('/sekolah/sekolahtype',sekolahController.getType);
  *         description: Data Tidak Di Temukan
  */
 router.post('/sekolah/detail/:id',sekolahController.UpdateSekolah);
+/**
+ * @swagger
+ * /sekolah/detail/{id}:
+ *   put:
+ *     summary: sekolah delete
+ *     tags: [sekolah]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: id sekolah
+ *     responses:
+ *       200:
+ *         description: Action Yg Akan di Pakai
+ *         contens:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *       404:
+ *         description: Data Tidak Di Temukan
+ */
+router.put('/sekolah/detail/:id',sekolahController.DeleteSekolah);
+
 
 module.exports = router;

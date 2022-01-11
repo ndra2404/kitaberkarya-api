@@ -53,5 +53,15 @@ const UpdateSekolah = (req, res) => {
       response.error500(err.message, [], res)
     })
 }
+const DeleteSekolah = (req, res) => {
+  sekolahModel
+    .Delete(req.params.id)
+    .then((data) => {
+     res.json({ success: true, data: data, Message:"Data Berhasil dihapus" })
+    })
+    .catch((err) => {
+      response.error500(err.message, [], res)
+    })
+}
 
-module.exports = { get,getById,addSekolah,UpdateSekolah,getType }
+module.exports = { get,getById,addSekolah,UpdateSekolah,getType,DeleteSekolah }
