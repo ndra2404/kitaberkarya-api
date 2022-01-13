@@ -41,18 +41,12 @@ const addData = async (table,primary,body) =>{
         });
      })
 }
-const Update = (idSekolah, body) => {
+const Update = (table,primary,idSekolah, body) => {
   return new Promise((resolve, reject) => {
-    knex('sekolah')
-      .update({
-             sekolahname:body.sekolahName,
-             alamatsekolah:body.alamatSekolah,
-             notlp:body.noTlp,
-             email:body.email,
-             typesekolah:body.typeSekolah
-         })
-      .where('sekolahID', idSekolah)
-      .returning('sekolahID')
+    knex(table)
+      .update(body)
+      .where(primary, idSekolah)
+      .returning(primary)
       .then((idSekolah) => {
         resolve(idSekolah);
       })
@@ -62,18 +56,11 @@ const Update = (idSekolah, body) => {
   });
 }
 
-const Delete = (idSekolah) => {
+const Delete = (table,primary,idSekolah) => {
   return new Promise((resolve, reject) => {
-    knex('sekolah')
-      .update({
-             sekolahname:body.sekolahName,
-             alamatsekolah:body.alamatSekolah,
-             notlp:body.noTlp,
-             email:body.email,
-             typesekolah:body.typeSekolah
-         })
-      .where('sekolahID', idSekolah)
-      .returning('sekolahID')
+    knex(table)
+      .del()
+      .where(primary, idSekolah)
       .then((idSekolah) => {
         resolve(idSekolah);
       })
@@ -81,7 +68,7 @@ const Delete = (idSekolah) => {
         reject(err);
       });
   });
-}
+};
 
 const getType = async () => {
   return new Promise((resolve, reject) => {
